@@ -40,6 +40,9 @@ type Config struct {
 	// List of key/value pairs you wish to
 	// pass to lxc launch via --config. Defaults to empty.
 	LaunchConfig map[string]string `mapstructure:"launch_config" required:"false"`
+	// Specify LXD remote server to use. It must be present in `lxc remote list`.
+	// Defaults to empty.
+	Remote string `mapstructure:"remote" required:"false"`
 
 	ctx interpolate.Context
 }
@@ -76,6 +79,10 @@ func (c *Config) Prepare(raws ...interface{}) error {
 
 	if c.Profile == "" {
 		c.Profile = "default"
+	}
+
+	if c.Remote != "" {
+		c.ContainerName = c.Remote + ":" + c.ContainerName
 	}
 
 	// Sadly we have to wait a few seconds for /tmp to be intialized and networking

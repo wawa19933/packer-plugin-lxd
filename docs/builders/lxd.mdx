@@ -77,5 +77,7 @@ Below is a fully functioning example.
   step to be set as properties on the output image. This is most helpful to
   set the description, but can be used to set anything needed. See [here](https://stgraber.org/2016/03/30/lxd-2-0-image-management-512/) for more properties.
 
+- `remote` (string) - The name of the remote LXD server (see `lxc remote ls`). Defaults to `""`.
+
 - `launch_config` (map\[string\]string) - List of key/value pairs you wish to
   pass to `lxc launch` via `--config`. Defaults to empty.
